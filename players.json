@@ -1,0 +1,26 @@
+[
+    {
+        "Name" : "Player 1",
+        "Rating" : 1000
+    },
+    {
+        "Name" : "Player 2",
+        "Rating" : 800
+    },
+    {
+        "Name" : "Player 3",
+        "Rating" : 2000
+    },
+    {
+        "Name" : "Player 4",
+        "Rating" : 1200
+    },
+    {
+        "Name" : "Player 5",
+        "Rating" : 1200
+    },
+    {
+        "Name" : "Player 6",
+        "Rating" : 200
+    }
+]

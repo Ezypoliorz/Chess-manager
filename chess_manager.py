@@ -1,39 +1,64 @@
-import chess_openings as openings
-import chess_games as games
+import load_data as data
 import chess.pgn
-import re
+import json
+import tkinter
+import customtkinter
 
-pgn_file_path = "game.pgn"
-archive_url = "https://api.chess.com/pub/player/ezypoliorz27/games/archives"
+if __name__ == "__main__" :
+    pgn_file_path = "game.pgn"
+    username = "EzypoIiorz"
+    archive_url = f"https://api.chess.com/pub/player/{username.lower()}"
 
-pgns_list = games.pgn(archive_url)
-pgns_data = []
+    name, avatar = data.pgn(archive_url, username)
 
-for pgn in pgns_list:
-    content=""
-    print(type(pgn))
-    print(len(pgn))
-    if len(pgn)>1:
-        content = pgn
-        content_formatted = content
-        content_formatted = re.split(r"0\\n|1\\n", content)
-        print(content_formatted)
-        for element_content in content_formatted:
-            with open(pgn_file_path, mode='w', encoding="utf-8") as game_file:
-                element_writing = "[" + str(element_content)
-                print(element_content)
-                game_file.write(element_writing)
-                game_file.close()
+    pgns_data = []
+    player_data = {
+        "Username" : username,
+        "Name" : name,
+        "Avatar" : avatar,
+        "Rapid" : [],
+        "Blitz" : [],
+        "Bullet" : []
+    }
 
-            with open(pgn_file_path, mode='r', encoding="utf-8") as game_file:
-                game = chess.pgn.read_game(game_file)
-                white = game.headers.get("White")
-                black = game.headers.get("Black")
-                result = game.headers.get("Result")
+    with open('games_data.json', 'r', encoding='utf-8') as f:
+        games_data = json.load(f)
 
-            opening=openings.opening(pgn_file_path)
-            add=[white, black, result, opening]
-            print(add)
-            pgns_data.append(add)
+    for game_data in games_data :
+        pgn = game_data["PGN"]
+        with open(pgn_file_path, 'w') as game_file :
+            game_file.write(pgn)
+        with open(pgn_file_path, 'r') as game_file :
+            game = chess.pgn.read_game(game_file)
 
-print(pgns_data)
+        result = game.headers.get("Termination")
+        date = game.headers.get("Date")
+        tournament = None
+        if game.headers.get("Tournament") :
+            tournament = game.headers.get("Tournament").split("/")[-1].rsplit('-', 1)[0].replace("-", " ").title()
+
+        opening=data.opening(pgn_file_path)
+        add = [item if item else None for item in [result, date, opening.split(":")[0] if ":" in opening else opening, tournament]]
+        pgns_data.append(add)
+
+        if game_data["Time-Control"] in player_data.keys() :
+            if game_data["White-Rating"] != 0:
+                player_data[game_data["Time-Control"]].append(game_data["White-Rating"] if game_data["White-Username"] == username else game_data["Black-Rating"])
+
+    for element, content in zip(games_data, pgns_data) :
+        pgn = element["PGN"]
+        del element["PGN"]
+        element["Result"] = content[0]
+        element["Date"] = content[1]
+        element["Opening"] = content[2]
+        if content[3] != None :
+            element["Tournament"] = content[3]
+        element["PGN"] = pgn
+
+    with open('games_data.json', 'w', encoding='utf-8') as f:
+        json.dump(games_data, f, indent=4, ensure_ascii=False)
+
+    with open('player_data.json', 'w') as f :
+        json.dump(player_data, f, indent=4, ensure_ascii=False)
+
+    data.opening_winrates()

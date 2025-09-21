@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Chess Manager</title>
+</head>
+<body>
+    <div class="div-nav">
+        <div class="div-element-nav"><a class="text-nav" href="index.html">Home/Profile</a></div>
+        <div class="div-element-nav"><a class="text-nav" href="openings-list.html">Openings</a></div>
+    </div>
+
+    <div class="div-openings-list" id="DivOpeningsList">
+
+    </div>
+
+    <div class="div-player-info">
+        <img class="profile-picture" id="ProfilePicture" src="" alt="">
+        <div class="player-names-container">
+            <div class="player-names">
+                <h3 class="username-text" id="UsernameText"></h3>
+                <h3 class="second-name-text" id="NameText"></h3>
+            </div>
+        </div>
+        <div class="profile-button" id="ProfileButton"><h3 class="text-profile-button">See profile</h3></div>
+        <div class="container-div-chart-rating">
+            <div class="div-chart-rating" id="DivChartRapidRating">
+                <h3 class="text-graph-rating">Rapid</h3>
+                <canvas class="chart-rating" id="ChartRapidRating"></canvas>
+            </div>
+            <div class="div-chart-rating" id="DivChartBlitzRating">
+                <h3 class="text-graph-rating">Blitz</h3>
+                <canvas class="chart-rating" id="ChartBlitzRating"></canvas>
+            </div>
+            <div class="div-chart-rating" id="DivChartBulletRating">
+                <h3 class="text-graph-rating">Bullet</h3>
+                <canvas class="chart-rating" id="ChartBulletRating"></canvas>
+            </div>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="openings-list-script.js"></script>
+</body>
+</html>

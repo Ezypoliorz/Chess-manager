@@ -1,0 +1,197 @@
+body{
+    background-color: rgb(36, 36, 36);
+    overflow: hidden;
+}
+
+
+
+.div-nav{
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    top: 10px;
+    left: 10px;
+    background-image: linear-gradient(to left, rgb(153, 194, 255), rgb(99, 162, 255));
+    width: calc(100vw - 20px);
+    height: 50px;
+    border-radius: 10px;
+}
+.div-element-nav{
+    display: flex;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.35s ease-in-out;
+}
+.div-element-nav:hover{
+    background-color: rgb(176, 174, 253);
+    cursor: pointer;
+}
+.text-nav{
+    text-decoration: none;
+    color: rgb(240, 81, 147);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+
+.div-openings-list{
+    position: fixed;
+    display: inline-block;
+    top: 80px;
+    left: 10px;
+    border-radius: 10px;
+    width: calc(100vw - 620px);
+    height: calc(100vh - 90px);
+    background-color: rgb(53, 53, 53);
+    overflow-y: auto;
+}
+.div-openings-list::-webkit-scrollbar{
+    width: 10px;
+}
+.div-openings-list::-webkit-scrollbar-track{
+    background-image: linear-gradient(to bottom, transparent, rgb(240, 81, 147), transparent);
+    border-radius: 5px;
+}
+.div-openings-list::-webkit-scrollbar-thumb{
+    background: rgb(153, 194, 255);
+    border-radius: 5px;
+}
+.div-opening{
+    border: 3px solid rgb(236, 238, 250);
+    border-radius: 10px;
+    margin: 20px;
+    padding: 15px;
+    width: 550px;
+    height: fit-content;
+    
+}
+.div-opening:hover{
+    background-color: rgb(53, 53, 53);
+    cursor: pointer;
+}
+.title-opening{
+    display: block;
+    margin-top: -5px;
+    margin-bottom: -10px;
+    color: rgb(153, 194, 255);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 25px;
+}
+.div-content-opening{
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    display: inline-flex;
+}
+.content-opening{
+    display: flex;
+    margin-bottom: -25px;
+    color: rgb(236, 238, 250);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+}
+
+
+
+.div-player-info{
+    position: fixed;
+    display: inline-block;
+    top: 80px;
+    right: 10px;
+    border-radius: 10px;
+    width: 580px;
+    height: calc(100vh - 90px);
+    background-color: rgb(53, 53, 53);
+}
+.profile-picture{
+    width: 125px;
+    height: 125px;
+    box-sizing: border-box;
+    border: 3px solid rgb(236, 238, 250);
+    border-radius: 50%;
+    position: fixed;
+    top: 90px;
+    right: 455px;
+}
+.player-names-container{
+    position: fixed;
+    height: 125px;
+    top: 90px;
+    left: calc(100vw - 445px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.player-names{
+    height: fit-content;
+}
+.username-text{
+    color: rgb(236, 238, 250);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 25px;
+    transition: 2s;
+}
+.second-name-text{
+    color: rgb(236, 238, 250);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    margin-top: -20px;
+}
+.profile-button{
+    transition: background-color 0.35s ease-in-out;
+    background-color: rgb(153, 194, 255);
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 130px;
+    right: 20px;
+    width: 125px;
+    height: 45px;
+    border-radius: 10px;
+}
+.profile-button:hover{
+    cursor: pointer;
+    background-color: rgb(176, 174, 253);
+    transition: background-color 0.35s ease-in-out;
+}
+.text-profile-button{
+    color: rgb(240, 81, 147);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+}
+.container-div-chart-rating {
+    position: fixed;
+    top: 215px;
+    right: 20px;
+    width: 560px;
+    height: calc(100vh - 90px - 135px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.div-chart-rating {
+    right: 20px;
+    width: 560px;
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.text-graph-rating {
+    color: rgb(236, 238, 250);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    margin: 0px;
+}
+
+
+
+.winrate-chart{
+    width: 100px !important;
+    height: auto !important;
+}

@@ -1,26 +1,50 @@
 [
     {
         "Name" : "Player 1",
-        "Rating" : 1000
+        "Rating" : 1000,
+        "Points" : 1,
+        "Games" : 2,
+        "White" : 1,
+        "Black" : 1
     },
     {
         "Name" : "Player 2",
-        "Rating" : 800
+        "Rating" : 800,
+        "Points" : 1,
+        "Games" : 2,
+        "White" : 1,
+        "Black" : 1
     },
     {
         "Name" : "Player 3",
-        "Rating" : 2000
+        "Rating" : 2000,
+        "Points" : 1,
+        "Games" : 2,
+        "White" : 1,
+        "Black" : 1
     },
     {
         "Name" : "Player 4",
-        "Rating" : 1200
+        "Rating" : 1200,
+        "Points" : 1,
+        "Games" : 2,
+        "White" : 1,
+        "Black" : 1
     },
     {
         "Name" : "Player 5",
-        "Rating" : 1200
+        "Rating" : 1200,
+        "Points" : 1,
+        "Games" : 2,
+        "White" : 1,
+        "Black" : 1
     },
     {
         "Name" : "Player 6",
-        "Rating" : 200
+        "Rating" : 200,
+        "Points" : 1,
+        "Games" : 2,
+        "White" : 1,
+        "Black" : 1
     }
 ]

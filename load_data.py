@@ -1,5 +1,6 @@
 import requests
 import multiprocessing
+import os
 import time
 import re
 import json
@@ -11,8 +12,11 @@ from stockfish import Stockfish
 
 username = ''
 
+num_cores = os.cpu_count()
+pool_size = num_cores*2
+
 def process_game(game_data):
-    game, i, username = game_data
+    game, username = game_data
 
     if "pgn" in game and str(game["rules"]) == "chess" and game["initial_setup"] != game["fen"] and game["initial_setup"][:-4] != game["fen"]:
         game_url = game["url"]
@@ -27,7 +31,6 @@ def process_game(game_data):
         game_pgn = "".join(re.split(r"{.*?}", game["pgn"]))
         
         return {
-            "Game-ID": i,
             "Game-URL": game_url,
             "White-Username": white_username,
             "White-Rating": white_rating,
@@ -38,6 +41,32 @@ def process_game(game_data):
             "PGN": game_pgn
         }
     return None
+
+def _process_archive(archive_url_and_username):
+    archives_url, username = archive_url_and_username
+    
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36"
+    }
+    
+    try:
+        response = requests.get(archives_url, headers=headers)
+        response.raise_for_status()
+        archive_data = response.json()
+        
+        games = archive_data["games"]
+
+        data_for_processing = [(game, username) for game in games]
+        
+        results = []
+        for game_data in data_for_processing:
+            results.append(process_game(game_data))
+        
+        return [res for res in results if res is not None]
+        
+    except requests.exceptions.RequestException as e:
+        print(f"Error while loading {archives_url} : {e}")
+        return []
 
 def pgn(get_archives_url, usernamee):
     global username
@@ -58,21 +87,22 @@ def pgn(get_archives_url, usernamee):
     archives_urls = archives_data["archives"]
     json_data = []
 
-    i = 0
-    previous_i = 0
-    print("Loading PGNs data...")
-    for j, archives_url in enumerate(archives_urls):
-        response = requests.get(archives_url, headers=headers)
-        response.raise_for_status()
-        archive_data = response.json()
-        data_for_pool = [(game, i+previous_i, username) for i, game in enumerate(archive_data["games"])]
-        previous_i += len(archive_data)
-        with multiprocessing.Pool() as pool:
-            results = pool.map(process_game, data_for_pool)
-            json_data += results
+    print("Processing data...")
+
+    data_for_pool = [(url, usernamee) for url in archives_urls]
+    
+    with multiprocessing.Pool(processes=pool_size) as pool:
+        list_of_game_lists = pool.map(_process_archive, data_for_pool)
+    
+    json_data = [game for game_list in list_of_game_lists for game in game_list]
+    
+    final_games_data = []
+    for new_id, game in enumerate(json_data):
+        game["Game-ID"] = new_id + 1
+        final_games_data.append(game)
         
     with open('games_data.json', 'w', encoding='utf-8') as f:
-        json.dump(json_data, f, indent=4, ensure_ascii=False)
+        json.dump(final_games_data, f, indent=4, ensure_ascii=False)
 
     return name, avatar
 
@@ -130,21 +160,26 @@ def opening_winrates():
         if opening_name not in openings_dict:
             new_opening = {
                 "Opening-Name": opening_name,
+                "Games": [],
                 "Wins": 0,
                 "Won-Games": [],
                 "Draws": 0,
                 "Drawn-Games": [],
                 "Losses": 0,
                 "Lost-Games": [],
-                "Win-Rate": 0
+                "Win-Rate": 0,
+                "Opening-Moves": "",
+                "Winrate-Evolution": [],
+                "Average-Position": ""
             }
             openings_dict[opening_name] = new_opening
             openings_data.append(new_opening)
 
         opening = openings_dict[opening_name]
         game_id = game["Game-ID"]
-
         result = game["Personnal-Result"]
+        opening["Games"].append({"Game-ID": game_id, "Result": result})
+
         if result == "Win" and game_id not in opening["Won-Games"]:
             opening["Wins"] += 1
             opening["Won-Games"].append(game_id)
@@ -154,6 +189,12 @@ def opening_winrates():
         elif result == "Loss" and game_id not in opening["Lost-Games"]:
             opening["Losses"] += 1
             opening["Lost-Games"].append(game_id)
+        total_games = opening["Wins"] + opening["Draws"] + opening["Losses"]
+        wins = 0
+        for game_opening in opening["Games"][-200:] :
+            if game_opening["Result"] == "Win" :
+                wins += 1
+        opening["Winrate-Evolution"].append({"Result": result, "Winrate": (wins / len(opening["Games"][-200:])) * 100})
 
     for opening in openings_data:
         total_games = opening["Wins"] + opening["Draws"] + opening["Losses"]
@@ -162,6 +203,21 @@ def opening_winrates():
             opening["Win-Rate"] = f"{win_rate:.2f}%"
         
         opening["Total-Games"] = total_games
+
+        opening_moves = []
+        with open("ECO_database.tsv", mode='r', encoding='utf-8') as file:
+            reader = csv.reader(file, delimiter='\t')
+            header = next(reader)
+            name_col_index = header.index('name')
+            pgn_col_index = header.index('pgn')
+            for row in reader:
+                if opening["Opening-Name"] in row[name_col_index].strip() :
+                    opening_moves.append(row[pgn_col_index].strip())
+        common = opening_moves[0]
+        for i in range(1, len(opening_moves)):
+            while opening_moves[i].startswith(common) is False:
+                common = common[:-1]
+        opening["Opening-Moves"] = common
 
     sorted_openings = sorted(openings_data, key=lambda x: x["Total-Games"], reverse=True)
 

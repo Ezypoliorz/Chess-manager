@@ -34,9 +34,7 @@
             <div class="div-opening"> 
                 <h3 class="title-opening">${opening}</h3>
                 <div class="div-content-opening">
-                    <h3 class="content-opening">Winrate : ${winrate}</h3> 
-                    <h3 class="content-opening">Games played : ${gamesPlayed}</h3> 
-                    <h3 class="content-opening">Games won : ${gamesWon}</h3> 
+                    <h3 class="content-opening">Winrate : <a class="${(gamesWon > gamesPlayed/2) ? "green" : "red"}">${winrate}</a> (${gamesWon}/${gamesPlayed})</h3>
                 </div>
             </div>
         `;

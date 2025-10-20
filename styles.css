@@ -39,7 +39,10 @@ body{
 
 .div-openings-list{
     position: fixed;
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
     top: 80px;
     left: 10px;
     border-radius: 10px;
@@ -52,7 +55,6 @@ body{
     width: 10px;
 }
 .div-openings-list::-webkit-scrollbar-track{
-    background-image: linear-gradient(to bottom, transparent, rgb(240, 81, 147), transparent);
     border-radius: 5px;
 }
 .div-openings-list::-webkit-scrollbar-thumb{
@@ -64,9 +66,8 @@ body{
     border-radius: 10px;
     margin: 20px;
     padding: 15px;
-    width: 550px;
+    width: 300px;
     height: fit-content;
-    
 }
 .div-opening:hover{
     background-color: rgb(53, 53, 53);
@@ -92,6 +93,16 @@ body{
     color: rgb(236, 238, 250);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 20px;
+}
+.red{
+    color: rgb(245, 156, 156);
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.green{
+    color: rgb(174, 245, 183);
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 
@@ -191,6 +202,89 @@ body{
 
 
 
+.name-opening{
+    position: fixed;
+    top: 70px;
+    left: 30px;
+    color: rgb(153, 194, 255);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 25px;
+}
+.moves-opening{
+    position: fixed;
+    top: 105px;
+    left: 40px;
+    color: rgb(236, 238, 250);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+}
+.winrate-table{
+    display: flex;
+    height: fit-content;
+    width: 360px;
+    display: flex;
+    justify-content: space-around;
+}
+.column-titles-winrate-table{
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.white-circle-winrate-table{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgb(236, 238, 250);
+}
+.black-circle-winrate-table{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgb(14, 14, 15);
+}
+.transparent-circle-winrate-table{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.column-winrate-table{
+    width: 100px;
+    border: 3px solid rgb(236, 238, 250);
+    border-radius: 10px;
+    height: 200px;
+    width: 100px;
+}
+.div-result-winrate-table{
+    background-color: rgb(153, 194, 255);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 50px;
+}
+.result-winrate-table{
+    color: rgb(236, 238, 250);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    transition: 2s;
+}
+.div-winrate-winrate-table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 150px;  
+}
+.winrate-winrate-table{
+    color: rgb(236, 238, 250);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    transition: 2s;
+    margin: 0 auto;
+}
 .winrate-chart{
     width: 100px !important;
     height: auto !important;

@@ -7,11 +7,82 @@
     <title>Chess Manager</title>
 </head>
 <body>
+    <div class="div-nav">
+        <div class="div-element-nav"><a class="text-nav" href="index.html">Home/Profile</a></div>
+        <div class="div-element-nav"><a class="text-nav" href="openings-list.html">Openings</a></div>
+    </div>
 
-    <h3>Sicilian defense</h3>
-    
+    <div class="div-openings-list" id="DivOpeningsList">
+        <h3 class="name-opening">Sicilian defence</h3>
+        <h3 class="moves-opening">1.e4 c5 </h3>
 
-    <canvas class="winrate-chart" id="chart1"></canvas>
+        <div class="winrate-table" id="WinrateTable">
+            <div class="column-titles-winrate-table">
+                <div class="white-circle-winrate-table"></div>
+                <div class="black-circle-winrate-table"></div>
+                <div class="transparent-circle-winrate-table"></div>
+            </div>
+            <div class="column-winrate-table">
+                <div class="div-result-winrate-table">
+                    <h3 class="result-winrate-table" id="WinsResultWinrateTable">Wins</h3>
+                </div>
+                <div class="div-winrate-winrate-table">
+                    <h3 class="winrate-winrate-table" id="BlacWinskWinrateWinrateTable">80%</h3>
+                    <h3 class="winrate-winrate-table" id="WhiteWinsWinrateWinrateTable">70%</h3>
+                    <h3 class="winrate-winrate-table" id="GlobalWinsWinrateWinrateTable">85%</h3>
+                </div>
+            </div>
+            <div class="column-winrate-table">
+                <div class="div-result-winrate-table">
+                    <h3 class="result-winrate-table" id="DrawsResultWinrateTable">Draws</h3>
+                </div>
+                <div class="div-winrate-winrate-table">
+                    <h3 class="winrate-winrate-table" id="BlackDrawsWinrateWinrateTable">10%</h3>
+                    <h3 class="winrate-winrate-table" id="WhiteDrawsWinrateWinrateTable">15%</h3>
+                    <h3 class="winrate-winrate-table" id="GlobalDrawsWinrateWinrateTable">12.5%</h3>
+                </div>
+            </div>
+            <div class="column-winrate-table">
+                <div class="div-result-winrate-table">
+                    <h3 class="result-winrate-table" id="LossesResultWinrateTable">Losses</h3>
+                </div>
+                <div class="div-winrate-winrate-table">
+                    <h3 class="winrate-winrate-table" id="BlackLossesWinrateWinrateTable">10%</h3>
+                    <h3 class="winrate-winrate-table" id="WhiteLossesWinrateWinrateTable">15%</h3>
+                    <h3 class="winrate-winrate-table" id="GlobalLossesWinrateWinrateTable">12.5%</h3>
+                </div>
+            </div>
+        </div>
+
+        <canvas class="chart-winrate-evolution" id="WinrateChartEvolution"></canvas>
+    </div>
+
+    <div class="div-player-info">
+        <img class="profile-picture" id="ProfilePicture" src="" alt="">
+        <div class="player-names-container">
+            <div class="player-names">
+                <h3 class="username-text" id="UsernameText"></h3>
+                <h3 class="second-name-text" id="NameText"></h3>
+            </div>
+        </div>
+        <div class="profile-button" id="ProfileButton"><h3 class="text-profile-button">See profile</h3></div>
+        <div class="container-div-chart-rating">
+            <div class="div-chart-rating" id="DivChartRapidRating">
+                <h3 class="text-graph-rating">Rapid</h3>
+                <canvas class="chart-rating" id="ChartRapidRating"></canvas>
+            </div>
+            <div class="div-chart-rating" id="DivChartBlitzRating">
+                <h3 class="text-graph-rating">Blitz</h3>
+                <canvas class="chart-rating" id="ChartBlitzRating"></canvas>
+            </div>
+            <div class="div-chart-rating" id="DivChartBulletRating">
+                <h3 class="text-graph-rating">Bullet</h3>
+                <canvas class="chart-rating" id="ChartBulletRating"></canvas>
+            </div>
+        </div>
+    </div>
+
+        <canvas class="winrate-chart" id="chart1"></canvas>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="opening-data-script.js"></script>

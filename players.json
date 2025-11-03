@@ -5,7 +5,8 @@
         "Points" : 1,
         "Games" : 2,
         "White" : 1,
-        "Black" : 1
+        "Black" : 1,
+        "Previous-opponents" : ["Player 4"]
     },
     {
         "Name" : "Player 2",
@@ -13,7 +14,8 @@
         "Points" : 1,
         "Games" : 2,
         "White" : 1,
-        "Black" : 1
+        "Black" : 1,
+        "Previous-opponents" : []
     },
     {
         "Name" : "Player 3",
@@ -21,7 +23,8 @@
         "Points" : 1,
         "Games" : 2,
         "White" : 1,
-        "Black" : 1
+        "Black" : 1,
+        "Previous-opponents" : []
     },
     {
         "Name" : "Player 4",
@@ -29,7 +32,8 @@
         "Points" : 1,
         "Games" : 2,
         "White" : 1,
-        "Black" : 1
+        "Black" : 1,
+        "Previous-opponents" : []
     },
     {
         "Name" : "Player 5",
@@ -37,7 +41,8 @@
         "Points" : 1,
         "Games" : 2,
         "White" : 1,
-        "Black" : 1
+        "Black" : 1,
+        "Previous-opponents" : []
     },
     {
         "Name" : "Player 6",
@@ -45,6 +50,7 @@
         "Points" : 1,
         "Games" : 2,
         "White" : 1,
-        "Black" : 1
+        "Black" : 1,
+        "Previous-opponents" : []
     }
 ]
